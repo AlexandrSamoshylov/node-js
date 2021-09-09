@@ -1,6 +1,9 @@
 {
   "name": "node-js",
   "version": "1.0.0",
+  "scripts": {
+    "dev": "node lesson2/app.js"
+  },
   "dependencies": {
     "express": "^4.17.1",
     "express-handlebars": "^5.3.3"
