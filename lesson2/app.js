@@ -36,9 +36,7 @@ app.post('/auth', (req, res) => {
     res.json(user);
 
 });
-app.get('/users', (req, res) => {
-    res.json(users);
-});
+
 
 app.get('/users/:user_id', (req, res) => {
     const { user_id } = req.params;
@@ -56,6 +54,10 @@ app.get('/login', (req, res) => {
     res.render('login');
 
 })
+
+app.get('/users', (req, res) => {
+    res.render('users', {userName: "Viktor", users, isMale: true });
+});
 
 let server = app.listen(PORT, () => {
     console.log('App listen', PORT)
