@@ -10,9 +10,10 @@ const app = express();
 const staticPath = path.join(__dirname, 'static');
   
 
-
+app.use(express.json());
+app.use(express.urlencoded ({extended: true}));
 app.use(express.static(staticPath));
-app.set('view engine', '.hds');
+app.set('view engine', '.hbs');
 app.engine('.hbs', expressHbs({ defaultLayout: false }));
 app.set('views', staticPath);
 
@@ -21,6 +22,20 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/ping', (req, res) => {  });
+
+app.post('/auth', (req, res) => {
+    const { name, password } = req.body;
+    
+    const user = users.find(user => user.name === name);
+
+    if(!user) {
+        res.status(404).end('User not found')
+        return;
+    }
+
+    res.json(user);
+
+});
 app.get('/users', (req, res) => {
     res.json(users);
 });
